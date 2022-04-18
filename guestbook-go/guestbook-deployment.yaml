@@ -46,6 +46,7 @@ spec:
     http:
      paths:
      - path: /
+       pathType: Prefix
        backend:
         serviceName: guestbook
         servicePort: 8080
