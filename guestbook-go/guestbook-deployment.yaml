@@ -19,7 +19,7 @@ spec:
         image: quay.io/ukreddyredhat/test-tekton:goweb
         ports:
         - name: http-server
-          containerPort: 8080
+          containerPort: 3000
 ---
 kind: Service
 apiVersion: v1
@@ -29,7 +29,7 @@ metadata:
     app: guestbook
 spec:
   ports:
-  - port: 8080
+  - port: 3000
     targetPort: http-server
   selector:
     app: guestbook
@@ -49,4 +49,4 @@ spec:
        pathType: Prefix
        backend:
         serviceName: guestbook
-        servicePort: 8080
+        servicePort: 3000
