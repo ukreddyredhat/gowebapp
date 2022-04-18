@@ -42,7 +42,7 @@ metadata:
   name: gowebapp
 spec:
   rules:
-  - host: localhost.com
+  - host: udaytestdemo.com
     http:
      paths:
      - path: /
