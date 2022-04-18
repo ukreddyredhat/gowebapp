@@ -28,10 +28,13 @@ metadata:
     app: guestbook
 spec:
   ports:
-  - port: 3000
+  - name: 8080-tcp
+    protocol: TCP
+    port: 3000
     targetPort: 3000
   selector:
     app: guestbook
+    deploymentconfig: guestbook
   type: ClusterIP
   
 ---
