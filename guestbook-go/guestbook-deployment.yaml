@@ -4,6 +4,7 @@ metadata:
   name: guestbook
   labels:
     app: guestbook
+    deploymentconfig: guestbook
 spec:
   replicas: 3
   selector:
@@ -18,7 +19,8 @@ spec:
       - name: guestbook
         image: quay.io/ukreddyredhat/test-tekton:goweb
         ports:
-        - containerPort: 8080
+        - name: 8080-tcp
+          containerPort: 8080
 ---
 kind: Service
 apiVersion: v1
