@@ -45,7 +45,7 @@ spec:
   - host: gowebapp.external.io
     http:
      paths:
-     - path: "/"
+     - path: /
        backend:
         serviceName: guestbook
         servicePort: 3000
