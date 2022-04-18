@@ -42,7 +42,8 @@ metadata:
   name: gowebapp
 spec:
   rules:
-  - http:
+  - host: localhost.com
+    http:
      paths:
      - path: /
        backend:
