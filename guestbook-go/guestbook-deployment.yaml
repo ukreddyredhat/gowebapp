@@ -4,7 +4,6 @@ metadata:
   name: guestbook
   labels:
     app: guestbook
-    deploymentconfig: guestbook
 spec:
   replicas: 3
   selector:
@@ -36,7 +35,6 @@ spec:
     targetPort: 8080
   selector:
     app: guestbook
-    deploymentconfig: guestbook
   type: ClusterIP
   
 ---
