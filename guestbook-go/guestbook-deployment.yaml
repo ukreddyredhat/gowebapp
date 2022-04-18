@@ -48,4 +48,4 @@ spec:
      - path: /
        backend:
         serviceName: guestbook
-        servicePort: 31824
+        servicePort: 3000
