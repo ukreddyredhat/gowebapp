@@ -34,3 +34,18 @@ spec:
   selector:
     app: guestbook
   type: LoadBalancer
+  
+ ---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gowebapp
+spec:
+  rules:
+  - host: gowebapp.external.io
+    http:
+     paths:
+     - path: /
+       backend:
+        serviceName: guestbook
+        servicePort: 8080
