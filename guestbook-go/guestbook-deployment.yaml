@@ -45,7 +45,7 @@ spec:
   - host: gowebapp.external.io
     http:
      paths:
-     - path: /
+     - path: "/"
        pathType: Prefix
        backend:
         serviceName: guestbook
