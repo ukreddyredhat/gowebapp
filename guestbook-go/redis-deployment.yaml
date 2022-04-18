@@ -1,35 +1,3 @@
-kind: Service
-apiVersion: v1
-metadata:
-  name: redis-master
-  labels:
-    app: redis
-    role: master
-spec:
-  ports:
-  - port: 6379
-    targetPort: redis-server
-  selector:
-    app: redis
-    role: master
-
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: redis-replica
-  labels:
-    app: redis
-    role: replica
-spec:
-  ports:
-  - port: 6379
-    targetPort: redis-server
-  selector:
-    app: redis
-    role: replica
-
----
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -54,3 +22,61 @@ spec:
         ports:
         - name: redis-server
           containerPort: 6379
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis-master
+  labels:
+    app: redis
+    role: master
+spec:
+  ports:
+  - port: 6379
+    targetPort: redis-server
+  selector:
+    app: redis
+    role: master
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: redis-replica
+  labels:
+    app: redis
+    role: replica
+spec:
+  replicas: 2
+  selector:
+    app: redis
+    role: replica
+  template:
+    metadata:
+      labels:
+        app: redis
+        role: replica
+    spec:
+      containers:
+      - name: redis-replica
+        image: k8s.gcr.io/redis-slave:v2
+        ports:
+        - name: redis-server
+          containerPort: 6379
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis-replica
+  labels:
+    app: redis
+    role: replica
+spec:
+  ports:
+  - port: 6379
+    targetPort: redis-server
+  selector:
+    app: redis
+    role: replica
