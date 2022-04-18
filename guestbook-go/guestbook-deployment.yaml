@@ -18,8 +18,8 @@ spec:
       - name: guestbook
         image: quay.io/ukreddyredhat/test-tekton:goweb
         ports:
-        - name: 8080-tcp
-          containerPort: 8080
+        - name: http-server
+          containerPort: 3000
 ---
 kind: Service
 apiVersion: v1
@@ -29,13 +29,11 @@ metadata:
     app: guestbook
 spec:
   ports:
-  - name: 8080-tcp
-    protocol: TCP
-    port: 8080
-    targetPort: 8080
+  - port: 3000
+    targetPort: http-server
   selector:
     app: guestbook
-  type: ClusterIP
+  type: LoadBalancer
   
 ---
 apiVersion: extensions/v1beta1
@@ -49,4 +47,4 @@ spec:
      - path: /
        backend:
         serviceName: guestbook
-        servicePort: 8080
+        servicePort: 3000
